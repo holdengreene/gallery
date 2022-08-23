@@ -1,0 +1,30 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model gallery {
+  id          BigInt    @id @default(autoincrement())
+  created_at  DateTime? @default(now()) @db.Timestamptz(6)
+  name        String
+  cover_photo String?
+  category    String
+  image       image[]
+
+  @@index([id], map: "idx_gallery")
+}
+
+model image {
+  id              BigInt    @id @default(autoincrement())
+  created_at      DateTime? @default(now()) @db.Timestamptz(6)
+  gallery_id      BigInt
+  image           String
+  thumbnail_image String?
+  gallery         gallery   @relation(fields: [gallery_id], references: [id], onDelete: Cascade, onUpdate: NoAction)
+
+  @@index([id], map: "idx_image")
+}
