@@ -1,6 +1,6 @@
 -- CreateTable
 CREATE TABLE "gallery" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "created_at" TIMESTAMPTZ(6) DEFAULT CURRENT_TIMESTAMP,
     "name" TEXT NOT NULL,
     "cover_photo" TEXT,
@@ -11,9 +11,9 @@ CREATE TABLE "gallery" (
 
 -- CreateTable
 CREATE TABLE "image" (
-    "id" BIGSERIAL NOT NULL,
+    "id" SERIAL NOT NULL,
     "created_at" TIMESTAMPTZ(6) DEFAULT CURRENT_TIMESTAMP,
-    "gallery_id" BIGINT NOT NULL,
+    "gallery_id" INTEGER NOT NULL,
     "image" TEXT NOT NULL,
     "thumbnail_image" TEXT,
 

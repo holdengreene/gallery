@@ -9,7 +9,11 @@
 
 <div class="gallery-grid">
 	{#each data.galleries as gallery}
-		<GalleryCard src={gallery.src} title={gallery.title} galleryId={gallery.id} />
+		<GalleryCard
+			src={gallery.cover_photo}
+			name={gallery.name}
+			galleryId={gallery.id}
+		/>
 	{/each}
 </div>
 

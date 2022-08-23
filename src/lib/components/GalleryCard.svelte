@@ -1,12 +1,12 @@
 <script lang="ts">
-	export let src: string;
-	export let title: string;
+	export let src: string | null;
+	export let name: string;
 	export let galleryId: number;
 </script>
 
 <article class="gallery-card">
-	<img {src} alt={title} />
-	<h2>{title}</h2>
+	<img src={src ?? '@TODO PLACEHOLDER IMAGE'} alt={name} />
+	<h2>{name}</h2>
 
 	<a href={`/gallery/${galleryId}`} sveltekit:prefetch>View Gallery</a>
 </article>
