@@ -1,5 +1,11 @@
 <script lang="ts">
-	import { page } from '$app/stores';
+	import type { PageData } from './$types';
+
+	export let data: PageData;
 </script>
 
-<h1>Yo this is {$page.params.slug}</h1>
+<h1>Yo this be {data.galleryName}</h1>
+
+{#each data.images as image}
+	<img src={image.thumbnail_image ?? image.image} alt={`Image from ${data.galleryName}`} />
+{/each}
