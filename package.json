@@ -37,6 +37,6 @@
 	"dependencies": {
 		"@supabase/supabase-js": "^1.35.6",
 		"cookie": "^0.5.0",
-		"normalize.css": "^8.0.1"
+		"modern-normalize": "^1.1.0"
 	}
 }

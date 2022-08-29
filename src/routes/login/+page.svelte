@@ -1,27 +1,41 @@
 <script lang="ts">
+	import FormCard from '$lib/components/form/FormCard.svelte';
+	import FormError from '$lib/components/form/FormError.svelte';
+	import InputWrap from '$lib/components/form/InputWrap.svelte';
+	import PasswordInput from '$lib/components/form/PasswordInput.svelte';
+	import SubmitButton from '$lib/components/form/SubmitButton.svelte';
+	import TextInput from '$lib/components/form/TextInput.svelte';
+
 	import type { Errors } from './$types';
 
 	export let errors: Errors;
 </script>
 
-<form method="post">
-	{#if errors?.login}
-		<div class="general-error">
-			<p>{errors.login}</p>
-		</div>
-	{/if}
+<main class="center-content full-page-height">
+	<FormCard>
+		<form method="post">
+			<div class="form-flex">
+				<h1>Log In</h1>
+				{#if errors?.login}
+					<FormError message={errors.login} type="general" />
+				{/if}
 
-	<label for="username">Username</label>
-	<input type="text" id="username" name="username" autocomplete="username" />
-	{#if errors?.username}
-		<p>{errors.username}</p>
-	{/if}
+				<InputWrap>
+					<TextInput label="Username" id="username" autocomplete="username" />
+					{#if errors?.username}
+						<FormError message={errors.username} />
+					{/if}
+				</InputWrap>
 
-	<label for="password">Password</label>
-	<input type="password" id="password" name="password" autocomplete="current-password" />
-	{#if errors?.password}
-		<p>{errors.password}</p>
-	{/if}
+				<InputWrap>
+					<PasswordInput />
+					{#if errors?.password}
+						<FormError message={errors.password} />
+					{/if}
+				</InputWrap>
 
-	<button type="submit">Log In</button>
-</form>
+				<SubmitButton text="Log In" />
+			</div>
+		</form>
+	</FormCard>
+</main>
