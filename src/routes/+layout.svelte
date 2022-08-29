@@ -6,9 +6,14 @@
 
 <style lang="scss" global>
 	@use 'modern-normalize/modern-normalize';
+	@use '../lib/css/variables';
+
+	body {
+		color: var(--primary-text-color);
+	}
 
 	.full-background {
-		background-color: #f9f9f9;
+		background-color: var(--primary-background-color);
 	}
 
 	.container {

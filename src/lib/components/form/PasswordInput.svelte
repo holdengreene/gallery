@@ -38,17 +38,17 @@
 	.form-input {
 		flex: 1;
 		padding: 5px;
-		border: 1px solid #5d5d5d;
+		border: 1px solid var(--light-border-color);
 		border-right: none;
 		border-radius: 3px 0 0 3px;
 
 		&:focus {
-			outline: 2px solid #a22ca2;
+			outline: 2px solid var(--primary-color);
 		}
 	}
 
 	.password-toggle {
-		border: 1px solid #5d5d5d;
+		border: 1px solid var(--light-border-color);
 		border-radius: 0 3px 3px 0;
 		cursor: pointer;
 	}

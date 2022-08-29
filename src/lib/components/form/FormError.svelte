@@ -9,10 +9,10 @@
 
 <style lang="scss">
 	.error {
-		background-color: #f44747;
+		background-color: var(--error-background-color);
 		padding: 10px 15px;
 		border-radius: 3px;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+		box-shadow: var(--subtle-box-shadow);
 	}
 
 	.general {
@@ -21,7 +21,7 @@
 	}
 
 	.message {
-		color: #000;
+		color: var(--primary-text-color);
 		font-weight: 600;
 		margin: 0;
 	}

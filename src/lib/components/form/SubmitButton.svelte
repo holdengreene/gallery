@@ -6,7 +6,7 @@
 
 <style lang="scss">
 	.submit-btn {
-		background-color: #a22ca2;
+		background-color: var(--primary-color);
 		padding: 5px 15px;
 		border: none;
 		color: #fff;
@@ -17,7 +17,7 @@
 		transition: background-color 0.25s ease;
 
 		&:hover {
-			background-color: #7b217b;
+			background-color: var(--primary-color-hover);
 		}
 	}
 </style>

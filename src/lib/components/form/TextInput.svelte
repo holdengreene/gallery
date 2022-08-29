@@ -2,7 +2,7 @@
 	export let type = 'text';
 	export let id: string;
 	export let label: string;
-    export let name = id;
+	export let name = id;
 	export let autocomplete: string | undefined = undefined;
 </script>
 
@@ -12,11 +12,11 @@
 <style lang="scss">
 	.form-input {
 		padding: 5px;
-		border: 1px solid #5d5d5d;
+		border: 1px solid var(--light-border-color);
 		border-radius: 3px;
 
 		&:focus {
-			outline: 2px solid #a22ca2;
+			outline: 2px solid var(--primary-color);
 		}
 	}
 </style>

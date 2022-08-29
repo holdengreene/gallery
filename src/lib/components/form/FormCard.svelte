@@ -4,10 +4,10 @@
 
 <style lang="scss">
 	.form-card {
-		background-color: #fff;
+		background-color: var(--light-background-color);
 		border-radius: 3px;
 		padding: 20px;
 		width: 30%;
-		box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
+		box-shadow: var(--subtle-box-shadow);
 	}
 </style>
