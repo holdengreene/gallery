@@ -14,6 +14,7 @@
 
 	.full-background {
 		background-color: var(--primary-background-color);
+		min-height: 100vh;
 	}
 
 	.container {

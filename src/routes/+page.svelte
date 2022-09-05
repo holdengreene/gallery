@@ -8,9 +8,11 @@
 <h1>Welcome to the Gallery</h1>
 
 <div class="gallery-grid">
-	{#each data.galleries as gallery}
-		<GalleryCard src={gallery.cover_photo} name={gallery.name} galleryId={gallery.id} />
-	{/each}
+	{#if data.galleries}
+		{#each data.galleries as gallery}
+			<GalleryCard src={gallery.cover_photo} name={gallery.name} galleryId={gallery.id} />
+		{/each}
+	{/if}
 </div>
 
 <style lang="scss">
