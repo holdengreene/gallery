@@ -18,7 +18,7 @@
 <label for={id}>{label}</label>
 
 <div class="password-wrap">
-	<input {type} {id} {name} {autocomplete} class="form-input" />
+	<input {type} {id} {name} {autocomplete} class="form-input" required />
 	<button class="password-toggle" type="button" on:click={toggleInputType}>
 		{#if type === 'password'}
 			<img src="/eye.svg" alt="show password" aria-hidden="true" width="20" height="20" />

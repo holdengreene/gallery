@@ -12,8 +12,8 @@
 
 	export let errors: Errors;
 
-	async function logIn(event: SubmitEvent) {
-		const { formErrors } = await sendForm(event.target as HTMLFormElement);
+	async function logIn({ target }: Event) {
+		const { formErrors } = await sendForm(target as HTMLFormElement, '/login');
 
 		if (formErrors) {
 			return (errors = formErrors);
@@ -46,7 +46,7 @@
 					{/if}
 				</InputWrap>
 
-				<SubmitButton text="Log In" />
+				<SubmitButton>Log In</SubmitButton>
 			</div>
 		</form>
 	</FormCard>

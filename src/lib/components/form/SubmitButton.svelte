@@ -1,8 +1,4 @@
-<script lang="ts">
-	export let text: string;
-</script>
-
-<button class="submit-btn" type="submit">{text}</button>
+<button class="submit-btn" type="submit"><slot /></button>
 
 <style lang="scss">
 	.submit-btn {
