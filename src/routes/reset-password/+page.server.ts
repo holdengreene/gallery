@@ -1,40 +1,31 @@
 import { supabase } from '$lib/supabaseClient';
-import { error } from '@sveltejs/kit';
-import type { Action } from './$types';
+import { error, invalid, redirect, type Actions } from '@sveltejs/kit';
 
-export const POST: Action = async ({ request, url }) => {
-	const values = await request.formData();
-	const accessToken = url.searchParams.get('access_token');
+export const actions: Actions = {
+	default: async ({ request, url }) => {
+		const values = await request.formData();
+		const accessToken = url.searchParams.get('access_token');
 
-	if (!accessToken) {
-		throw error(403, 'No access token');
-	}
+		if (!accessToken) {
+			throw error(403, 'No access token');
+		}
 
-	const password = values.get('password');
+		const password = values.get('password');
 
-	if (!password) {
-		return {
-			status: 400,
-			errors: {
+		if (!password) {
+			return invalid(400, {
 				password: 'No password entered'
-			}
-		};
+			});
+		}
+
+		const { error: supabaseError } = await supabase.auth.api.updateUser(accessToken, {
+			password: password.toString()
+		});
+
+		if (supabaseError) {
+			return invalid(supabaseError.status, { password: supabaseError.message });
+		}
+
+		throw redirect(303, '/login');
 	}
-
-	const { error: supabaseError } = await supabase.auth.api.updateUser(accessToken, {
-		password: password.toString()
-	});
-
-	if (supabaseError) {
-		return {
-			status: supabaseError.status,
-			errors: {
-				password: supabaseError.message
-			}
-		};
-	}
-
-	return {
-		location: '/login'
-	};
 };

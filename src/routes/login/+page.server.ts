@@ -1,7 +1,7 @@
 import { supabase } from '$lib/supabaseClient';
-import { redirect } from '@sveltejs/kit';
-import cookie from 'cookie';
-import type { Action, PageServerLoad } from './$types';
+import { invalid, redirect, type Actions } from '@sveltejs/kit';
+import type { CookieSerializeOptions } from 'cookie';
+import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = ({ locals }) => {
 	if (locals.user) {
@@ -9,64 +9,44 @@ export const load: PageServerLoad = ({ locals }) => {
 	}
 };
 
-export const POST: Action = async ({ request, setHeaders }) => {
-	const values = await request.formData();
+export const actions: Actions = {
+	default: async ({ request, cookies }) => {
+		const values = await request.formData();
 
-	const username = values.get('username');
-	const password = values.get('password');
+		const username = values.get('username');
+		const password = values.get('password');
 
-	if (!username) {
-		return {
-			status: 400,
-			errors: {
-				username: 'Please enter a username'
-			}
+		if (!username) {
+			return invalid(400, { username: 'Please enter a username' });
+		}
+
+		if (!password) {
+			return invalid(400, { password: 'Please enter a password' });
+		}
+
+		const { session, error } = await supabase.auth.signIn({
+			email: username.toString(),
+			password: password.toString()
+		});
+
+		if (error) {
+			return invalid(error.status, { login: error.message });
+		}
+
+		const cookieOptions: CookieSerializeOptions = {
+			maxAge: 28_800, // 8 hours
+			sameSite: 'strict',
+			path: '/'
 		};
+
+		if (session?.access_token) {
+			cookies.set('sb-access-token', session.access_token, cookieOptions);
+		}
+
+		if (session?.refresh_token) {
+			cookies.set('sb-refresh-token', session.refresh_token, cookieOptions);
+		}
+
+		throw redirect(303, '/admin');
 	}
-
-	if (!password) {
-		return {
-			status: 400,
-			errors: {
-				password: 'Please enter a password'
-			}
-		};
-	}
-
-	const { session, error } = await supabase.auth.signIn({
-		email: username.toString(),
-		password: password.toString()
-	});
-
-	if (error) {
-		return {
-			status: error.status,
-			errors: {
-				login: error.message
-			}
-		};
-	}
-
-	const cookieOptions: cookie.CookieSerializeOptions = {
-		maxAge: 28_800, // 8 hours
-		httpOnly: true,
-		sameSite: 'strict',
-		path: '/',
-		secure: true
-	};
-
-	const accessTokenCookie = session?.access_token
-		? cookie.serialize('sb-access-token', session.access_token, cookieOptions)
-		: '';
-	const refreshTokenCookie = session?.refresh_token
-		? cookie.serialize('sb-refresh-token', session.refresh_token, cookieOptions)
-		: '';
-
-	setHeaders({
-		'set-cookie': [accessTokenCookie, refreshTokenCookie]
-	});
-
-	return {
-		location: '/admin'
-	};
 };
