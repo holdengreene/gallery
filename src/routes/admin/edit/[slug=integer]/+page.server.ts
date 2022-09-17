@@ -1,4 +1,4 @@
-import { getGalleryNameById, getImagesByGalleryId } from '$lib/ts/dbQueries';
+import { getImagesByGalleryId, getGalleryNameById } from '$lib/ts/dbQueries';
 import type { PageServerLoad } from './$types';
 
 export const load: PageServerLoad = async ({ params }) => {
