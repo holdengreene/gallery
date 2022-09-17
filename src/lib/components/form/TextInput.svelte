@@ -4,10 +4,11 @@
 	export let label: string;
 	export let name = id;
 	export let autocomplete: string | undefined = undefined;
+	export let required = false;
 </script>
 
 <label for={id}>{label}</label>
-<input {type} {id} {name} {autocomplete} class="form-input" />
+<input {type} {id} {name} {autocomplete} {required} class="form-input" />
 
 <style lang="scss">
 	.form-input {

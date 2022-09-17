@@ -21,7 +21,7 @@
 				{/if}
 
 				<InputWrap>
-					<TextInput label="Username" id="username" autocomplete="username" />
+					<TextInput label="Username" id="username" autocomplete="username" required={true} />
 					{#if form?.username}
 						<FormError message={form.username} />
 					{/if}
