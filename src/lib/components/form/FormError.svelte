@@ -1,10 +1,9 @@
 <script lang="ts">
-	export let message: string;
 	export let type = 'input';
 </script>
 
 <div class="error {type === 'general' ? 'general' : ''}">
-	<p class="message">{message}</p>
+	<p class="message"><slot>There was an error</slot></p>
 </div>
 
 <style lang="scss">

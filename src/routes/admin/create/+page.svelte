@@ -4,8 +4,8 @@
 	import FormError from '$lib/components/form/FormError.svelte';
 	import FormFlex from '$lib/components/form/FormFlex.svelte';
 	import InputWrap from '$lib/components/form/InputWrap.svelte';
-	import PasswordInput from '$lib/components/form/PasswordInput.svelte';
 	import SubmitButton from '$lib/components/form/SubmitButton.svelte';
+	import TextInput from '$lib/components/form/TextInput.svelte';
 	import type { ActionData } from './$types';
 
 	export let form: ActionData;
@@ -15,27 +15,33 @@
 	<FormCard>
 		<form method="post" use:enhance>
 			<FormFlex>
-				<h1>Reset Password</h1>
-
+				<h1>Create Gallery</h1>
 				<InputWrap>
-					<PasswordInput label="New Password" autocomplete="new-password" />
-					{#if form?.password}
-						<FormError>{form.password}</FormError>
+					<TextInput label="Gallery Name" id="name" required={true} />
+
+					{#if form?.galleryName}
+						<FormError>{form.galleryName}</FormError>
 					{/if}
 				</InputWrap>
 
-				<SubmitButton>Reset Password</SubmitButton>
+				<InputWrap>
+					<TextInput label="Category" id="category" required={true} />
+
+					{#if form?.category}
+						<FormError>{form.category}</FormError>
+					{/if}
+				</InputWrap>
+
+				<InputWrap>
+					<TextInput label="Cover Photo" id="cover-photo" required={true} />
+
+					{#if form?.coverPhoto}
+						<FormError>{form.coverPhoto}</FormError>
+					{/if}
+				</InputWrap>
+
+				<SubmitButton>Create Gallery</SubmitButton>
 			</FormFlex>
 		</form>
 	</FormCard>
 </main>
-
-<form method="post">
-	<label for="password">New Password</label>
-	<input type="password" id="password" name="password" autocomplete="new-password" required />
-	{#if form?.password}
-		<p>{form.password}</p>
-	{/if}
-
-	<button type="submit">Reset Password</button>
-</form>

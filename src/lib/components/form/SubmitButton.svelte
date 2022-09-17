@@ -1,4 +1,4 @@
-<button class="submit-btn" type="submit"><slot /></button>
+<button class="submit-btn" type="submit"><slot>Submit</slot></button>
 
 <style lang="scss">
 	.submit-btn {

@@ -15,6 +15,7 @@
 	.full-background {
 		background-color: var(--primary-background-color);
 		min-height: 100vh;
+		min-height: 100dvh;
 	}
 
 	.container {
@@ -30,13 +31,5 @@
 
 	.full-page-height {
 		min-height: 100vh;
-	}
-
-	.form-flex {
-		display: flex;
-		flex-direction: column;
-		justify-content: center;
-		align-items: center;
-		gap: 20px;
 	}
 </style>
